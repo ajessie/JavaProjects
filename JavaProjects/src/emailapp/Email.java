@@ -10,10 +10,9 @@ public class Email {
 	private String password;
 	private String department;
 	private String email;
-	 private int mailboxCapacity; 
-	// private int defaultPasswordLength; 
-	 private String alternateEmail;
-	 private String companySuffix = "company.com";
+	private int mailboxCapacity = 500; 
+	private String alternateEmail;
+	private String companySuffix = "company.com";
 	 
 	// Constructor to receive the first and last name
 	
@@ -40,7 +39,6 @@ public class Email {
 	}
 	
 	//Ask for department
-	
 	private String setDepartment() {
 		System.out.print("DEPARTMENT CODES\n1 for Sales\n2 for Development\n3 for Accounting\n0 for none");
 		Scanner in = new Scanner(System.in);
@@ -64,10 +62,28 @@ public class Email {
 	
 	}
 	
-
 	//Set mailbox Capacity
+	public void setMailboxCapcity(int capacity) {
+		this.mailboxCapacity = capacity;
+	}
 	
 	//Set alternate email
+	public void alternateEmail(String altEmail) {
+		this.alternateEmail = altEmail;
+	}
 	
 	//Change the password 
+	public void changePassword(String password) {
+		this.password = password;
+	}
+		
+		public int getMailboxCapacity() { return mailboxCapacity;}
+		public String getAlternateEmail() {return alternateEmail;}
+		public String getPassword() {return password;}
+		
+		public String showInfo() {
+			return "DISPLAY_NAME: " + firstName + " " + lastName + "\n" +
+					"COMPANY_EMAIL: " + email + "\n" +
+					"MAILBOX_CAPACITY: " + mailboxCapacity + "mb";
+		}
 }
