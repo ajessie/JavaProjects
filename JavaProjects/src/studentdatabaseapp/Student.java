@@ -16,10 +16,9 @@ public Student (){
 	String userName = this.userName;
 	int studentYear = this.studentYear;
 	String studentNumber = this.studentNumber;
-	int answer = this.answer;
 	
+	//Call method to get the number of students
 	getNumberOfStudents();
-	
 	//Call a method to ask user the name of student
 	this.userName = getUserName();
 	
@@ -104,35 +103,31 @@ public String getStudentNumber(){
 //	 int counter = 0;
 //	 int total;
 	 
-		while(true)
-			{
-			 if (input.equals("HIST1001")) {
+		switch (input){
+		
+				case "HIST1001":
+						 
 				 System.out.println("History 101 added");
-//				 counter++;
 				 break;
-				 }
-			 if (input.equals("MATH1001")) {
+				 
+				case "MATH1001":
 				 System.out.println("Mathematics 101 added");
 //				 counter++;
 				 break;
-				 }
-			 if (input.equals("CHEM1001")){
-				 System.out.println("Chemistry 10001 added");
-//				 counter++;
-				 break;
-			 }
-			 if (input.equals("ENGL1001")){
-				 System.out.println("English 10001 added");
-//				 counter++;
-				 break;
-			 }
-			 if (input.equals("COMP1001")){
-				 System.out.println("Computer Science 10001 added");
-//				 counter++;
-				 break;
-			 }
-			 
-			 if (input.equals("Q")) {
+				 
+				case "CHEM1001":
+					System.out.println("Chemistry 101 added");
+					break;
+					
+				case "ENGL1001":
+					System.out.println("English 101 added");
+					break;
+					
+				case "COMP1001":
+					System.out.println("Computer Science 101 added");
+					break;
+					
+				case "Q": 
 				 System.out.println("Ready to quit?");
 				 System.out.println("Enter y to confirm");
 				 in = new Scanner(System.in );
@@ -143,13 +138,10 @@ public String getStudentNumber(){
 						 break;
 						 
 					 }
-		}
-	}
 		
-		//System.out.println("Enter course to enroll [Q to quit]");
+		}
 		enrollStudent();
 }
-
 
 //Display "main menu"
  public void displayMainMenu() {
