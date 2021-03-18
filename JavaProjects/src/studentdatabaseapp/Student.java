@@ -9,6 +9,9 @@ private String userName;
 private int studentYear;
 private String studentNumber;
 private int answer;
+//private String enrollmentAnswer;
+//private String courseSelected;
+private String course;
 Scanner in = new Scanner (System.in);
 
 //////////////////Constructor////////////////////////////////
@@ -97,7 +100,56 @@ public String getStudentNumber(){
  
  //Enroll Student in course 
  public void enrollStudent() {
-	 System.out.println("Select course below");
+	
+	// String course[] = new String[4];
 	 
- }
+	 System.out.println("History 101 [HIST1001]" 
+			 		+ "\nMathematics 1001 [MATH1001]" 
+			 		+ "\nChemistry 1001 [CHEM1001]" 
+			 		+ "\nEnglish 1001 [ENGL1001]"
+			 		+ "\nComputer Science 1001 [COMP1001\n");
+	 
+	 System.out.println("Enter course to enroll [Q to quit]: ");
+	  
+	 in = new Scanner (System.in);
+	 String input = in.next();
+//	 int counter = 0;
+//	 int total;
+	 
+		while(true)
+			{
+			 if (input.equals("HIST1001")) {
+				 System.out.println("History 101 added");
+//				 counter++;
+				 break;
+				 }
+			 if (input.equals("MATH1001")) {
+				 System.out.println("Mathematics 101 added");
+//				 counter++;
+				 break;
+				 }
+			 if (input.equals("CHEM1001")){
+				 System.out.println("Chemistry 10001 added");
+//				 counter++;
+				 break;
+			 }
+			 if (input.equals("ENGL1001")){
+				 System.out.println("English 10001 added");
+//				 counter++;
+				 break;
+			 }
+			 if (input.equals("COMP1001")){
+				 System.out.println("Computer Science 10001 added");
+//				 counter++;
+				 break;
+			 }
+			 
+			 if (input.equals("Q")) {
+				 System.out.println("Ready to quit?");
+			 }
+			}
+		
+		System.out.println("Enter course to enroll [Q to quit]");
+		enrollStudent();
+	}
 }
