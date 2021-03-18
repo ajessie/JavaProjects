@@ -9,9 +9,6 @@ private String userName;
 private int studentYear;
 private String studentNumber;
 private int answer;
-//private String enrollmentAnswer;
-//private String courseSelected;
-private String course;
 Scanner in = new Scanner (System.in);
 
 //////////////////Constructor////////////////////////////////
@@ -25,8 +22,10 @@ public Student (){
 	
 	//Call a method to ask user the name of student
 	this.userName = getUserName();
+	
 	//Call method to get the grade of the student 
 	this.studentYear = getStudentYear();
+	
 	//call method to get student number
 	this.studentNumber = getStudentNumber();
 	
@@ -34,15 +33,7 @@ public Student (){
 	displayStudentInfo(userName, studentYear, studentNumber);
 	
 	//Ask user if they would like to enroll a student
-	System.out.println("\nWhat would you like to do?\n ");
-	System.out.println("Enrollment [1]" + "\nDrop Course [2]" + "\nSee Student Bill [3]");
-	in = new Scanner(System.in);
-	answer = in.nextInt();
-	
-	if (answer == 1) 
-		enrollStudent();
-	
-	
+	displayMainMenu();
 	
 }
 /////////////////End Constructor//////////////////////////////////////////////// 
@@ -100,9 +91,6 @@ public String getStudentNumber(){
  
  //Enroll Student in course 
  public void enrollStudent() {
-	
-	// String course[] = new String[4];
-	 
 	 System.out.println("History 101 [HIST1001]" 
 			 		+ "\nMathematics 1001 [MATH1001]" 
 			 		+ "\nChemistry 1001 [CHEM1001]" 
@@ -146,10 +134,34 @@ public String getStudentNumber(){
 			 
 			 if (input.equals("Q")) {
 				 System.out.println("Ready to quit?");
-			 }
-			}
-		
-		System.out.println("Enter course to enroll [Q to quit]");
-		enrollStudent();
+				 System.out.println("Enter y to confirm");
+				 in = new Scanner(System.in );
+				 input = in.next();
+					 if (input.equals("y"))
+					 {
+						 displayMainMenu();
+						 break;
+						 
+					 }
+		}
 	}
+		
+		//System.out.println("Enter course to enroll [Q to quit]");
+		enrollStudent();
+}
+
+
+//Display "main menu"
+ public void displayMainMenu() {
+	System.out.println("\nWhat would you like to do?\n ");
+	System.out.println("Enrollment [1]" + "\nDrop Course [2]" + "\nSee Student Bill [3]");
+	in = new Scanner(System.in);
+	answer = in.nextInt();
+	
+	if (answer == 1) 
+		enrollStudent();
+	if (answer == 2)
+		System.out.println("Drop Course");	
+ 	
+ 	}
 }
