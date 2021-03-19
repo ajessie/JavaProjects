@@ -9,6 +9,7 @@ private String userName;
 private int studentYear;
 private String studentNumber;
 private int answer;
+private int counter;
 Scanner in = new Scanner (System.in);
 
 //////////////////Constructor////////////////////////////////
@@ -66,7 +67,6 @@ public String getStudentNumber(){
   return new String (studentNumber); 
 }
  
-
 //Get the year of the student
  public int getStudentYear() {
   System.out.println("Enter the year of the student: "); in = new
@@ -100,45 +100,51 @@ public String getStudentNumber(){
 	  
 	 in = new Scanner (System.in);
 	 String input = in.next();
-//	 int counter = 0;
-//	 int total;
+	 int total;
 	 
-		switch (input){
-		
+		switch (input)
+		{
 				case "HIST1001":
 						 
-				 System.out.println("History 101 added");
+				 System.out.println("History 101 added\n");
+				 //counter++;
 				 break;
 				 
 				case "MATH1001":
-				 System.out.println("Mathematics 101 added");
-//				 counter++;
+				 System.out.println("Mathematics 101 added\n");
+				 //counter++;
 				 break;
 				 
 				case "CHEM1001":
-					System.out.println("Chemistry 101 added");
+					System.out.println("Chemistry 101 added\n");
+					//counter++;
 					break;
 					
 				case "ENGL1001":
-					System.out.println("English 101 added");
+					System.out.println("English 101 added\n");
+					//counter++;
 					break;
 					
 				case "COMP1001":
-					System.out.println("Computer Science 101 added");
-					break;
-					
-				case "Q": 
-				 System.out.println("Ready to quit?");
-				 System.out.println("Enter y to confirm");
-				 in = new Scanner(System.in );
-				 input = in.next();
-					 if (input.equals("y"))
-					 {
-						 displayMainMenu();
-						 break;
-						 
-					 }
-		
+					System.out.println("Computer Science 101 added\n");
+					//counter++;
+					break;	
+	}
+		switch (input) {
+			
+		case "HIST1001":
+		case "MATH1001":
+		case "CHEM1001":
+		case "ENGL1001":
+		case "COMP1001":
+			counter++;
+			break;
+			
+		case "Q":
+			System.out.println("Program Ended");
+			total = calculateTotal(counter);
+			System.out.println("Total Tuition: " + total);
+			displayMainMenu();
 		}
 		enrollStudent();
 }
@@ -156,4 +162,13 @@ public String getStudentNumber(){
 		System.out.println("Drop Course");	
  	
  	}
+
+//Calculate total tuition bill after enrollment
+ public int calculateTotal(int counter) {
+		 int total;
+		 //counter = this.counter;
+		 total = counter * 600;
+		 return total;
+ 	}
 }
+
