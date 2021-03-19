@@ -149,6 +149,68 @@ public String getStudentNumber(){
 		enrollStudent();
 }
 
+ //Drop student from course
+ public void dropCourse(int counter) {
+	 
+	 System.out.println("History 101 [HIST1001]" 
+		 		+ "\nMathematics 1001 [MATH1001]" 
+		 		+ "\nChemistry 1001 [CHEM1001]" 
+		 		+ "\nEnglish 1001 [ENGL1001]"
+		 		+ "\nComputer Science 1001 [COMP1001\n");
+
+	 System.out.println("Enter course to drop [Q to quit]: ");
+	 
+	 in = new Scanner (System.in);
+	 String input = in.next();
+	 int total;
+	 
+		switch (input)
+		{
+				case "HIST1001":
+						 
+				 System.out.println("History 101 dropped\n");
+				 //counter++;
+				 break;
+				 
+				case "MATH1001":
+				 System.out.println("Mathematics 101 dropped\n");
+				 //counter++;
+				 break;
+				 
+				case "CHEM1001":
+					System.out.println("Chemistry 101 dropped\n");
+					//counter++;
+					break;
+					
+				case "ENGL1001":
+					System.out.println("English 101 dropped\n");
+					//counter++;
+					break;
+					
+				case "COMP1001":
+					System.out.println("Computer Science 101 dropped\n");
+					//counter++;
+					break;	
+	}
+		switch (input) {
+			
+		case "HIST1001":
+		case "MATH1001":
+		case "CHEM1001":
+		case "ENGL1001":
+		case "COMP1001":
+			counter--;
+			break;
+			
+		case "Q":
+			System.out.println("Program Ended");
+			total = calculateTotal(counter);
+			System.out.println("Total Tuition: " + total);
+			displayMainMenu();
+		}
+	 dropCourse(counter); 
+ }
+ 
 //Display "main menu"
  public void displayMainMenu() {
 	System.out.println("\nWhat would you like to do?\n ");
@@ -159,7 +221,8 @@ public String getStudentNumber(){
 	if (answer == 1) 
 		enrollStudent();
 	if (answer == 2)
-		System.out.println("Drop Course");	
+		dropCourse(counter);
+		//System.out.println("Drop Course");	
  	
  	}
 
