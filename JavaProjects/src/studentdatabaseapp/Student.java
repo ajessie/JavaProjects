@@ -81,6 +81,7 @@ public String getStudentNumber(){
 	int stuYear = this.studentYear;
 	String stuNum = this.studentNumber;
 	
+	System.out.println("\n///////////////////////Student Information///////////////////////////");
 	System.out.println("Name" + "              " +  "Year" +"            " + "Student Number");
 	System.out.println(userName_2 + "           " + stuYear + "               " + stuNum);
 	 
@@ -227,7 +228,7 @@ public String getStudentNumber(){
  //Display the main menu to the user
 //Display "main menu"
  public void displayMainMenu() {
-	System.out.println("\nWhat would you like to do?\n ");
+	System.out.println("\nWhat would you like to do?");
 	System.out.println("Enrollment [1]" + "\nDrop Course [2]" + "\nSee Student Bill [3]");
 	in = new Scanner(System.in);
 	answer = in.nextInt();
@@ -235,8 +236,7 @@ public String getStudentNumber(){
 	if (answer == 1) 
 		enrollStudent();
 	if (answer == 2)
-		dropCourse(counter);
-		//System.out.println("Drop Course");	
+		dropCourse(counter);	
  	
  	}
 //Calculate the total bill for the student
