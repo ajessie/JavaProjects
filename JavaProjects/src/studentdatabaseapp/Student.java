@@ -9,7 +9,11 @@ private String userName;
 private int studentYear;
 private String studentNumber;
 private int answer;
-private int counter;
+private int counter_Enrollment;
+private int counter_Dropped;
+private int total_E;
+private int total_Final_E;
+private int total_Refund;
 private String course[] = new String[5];
 Scanner in = new Scanner (System.in);
 
@@ -101,7 +105,6 @@ public String getStudentNumber(){
 	  
 	 in = new Scanner (System.in);
 	 String input = in.next();
-	 int total;
 	 	 
 	 if(in.findAll("HIST1001"+ "MATH1001" + "CHEM1001" + "ENGL1001" + "COMP1001") != null) {
 		switch (input)
@@ -144,8 +147,8 @@ public String getStudentNumber(){
 						}
 					}
 					
-					total = calculateTotal(counter);
-					System.out.println("Total Tuition: " + total);
+					total_Final_E = calculateTotalEnrollment(counter_Enrollment)			;		
+					System.out.println("Enrollment fees: " + total_Final_E);
 					displayMainMenu();
 				
 			}
@@ -156,7 +159,7 @@ public String getStudentNumber(){
 		case "CHEM1001":
 		case "ENGL1001":
 		case "COMP1001":
-			counter++;
+			counter_Enrollment++;
 			break;
 		}
 		
@@ -165,7 +168,7 @@ public String getStudentNumber(){
  }
 //Drop a student from a course
  //Drop student from course
- public void dropCourse(int counter) {
+ public void dropCourse(int counter_Dropped) {
 	 
 	 System.out.println("History 101 [HIST1001]" 
 		 		+ "\nMathematics 1001 [MATH1001]" 
@@ -173,57 +176,70 @@ public String getStudentNumber(){
 		 		+ "\nEnglish 1001 [ENGL1001]"
 		 		+ "\nComputer Science 1001 [COMP1001\n");
 
-	 System.out.println("Enter course to drop [Q to quit]: ");
+System.out.println("Enter course to drop [Q to quit]: ");
+
+in = new Scanner (System.in);
+String input = in.next();
 	 
-	 in = new Scanner (System.in);
-	 String input = in.next();
-	 int total;
-	 
-		switch (input)
-		{
-				case "HIST1001":
-						 
-				 System.out.println("History 101 dropped\n");
-				 //counter++;
-				 break;
-				 
-				case "MATH1001":
-				 System.out.println("Mathematics 101 dropped\n");
-				 //counter++;
-				 break;
-				 
-				case "CHEM1001":
-					System.out.println("Chemistry 101 dropped\n");
-					//counter++;
-					break;
+if(in.findAll("HIST1001"+ "MATH1001" + "CHEM1001" + "ENGL1001" + "COMP1001") != null) {
+	switch (input)
+	{
+	
+			case "HIST1001":
+			course[0] = "History 101 dropped";
+			System.out.println("History 101 dropped\n");
+			 break;
+			 
+			case "MATH1001":
+			course[1] = "Math dropped";
+			 System.out.println("Mathematics 101 dropped\n");
+			 break;
+			 
+			case "CHEM1001":
+				course[2] = "CHEM1001";
+				System.out.println("Chemistry 101 dropped\n");
+				break;
+				
+			case "ENGL1001":
+				course[3] = "ENGL1001";
+				System.out.println("English 101 dropped\n");
+				break;
+				
+			case "COMP1001":
+				course[4] = "COMP1001";
+				System.out.println("Computer Science 101 dropped\n");
+				break;	
+				
+			case "Q":
+				course.clone().toString();
+				System.out.println("Program Ended");
+				System.out.println("Dropped Courses: \n");
+				
+				for (int i=0; i < course.length; i++) {
 					
-				case "ENGL1001":
-					System.out.println("English 101 dropped\n");
-					//counter++;
-					break;
-					
-				case "COMP1001":
-					System.out.println("Computer Science 101 dropped\n");
-					//counter++;
-					break;	
-	}
-		switch (input) {
+				   if (course[i] != null) {
+					   System.out.println(course[i]);
+					}
+				}
+				
+				total_Refund = calculateTotalDropped(counter_Dropped, total_E);
+				System.out.println("Credit: " + total_Refund);
+				displayMainMenu();
 			
-		case "HIST1001":
-		case "MATH1001":
-		case "CHEM1001":
-		case "ENGL1001":
-		case "COMP1001":
-			counter--;
-			break;
-			
-		case "Q":
-			System.out.println("Program Ended");
-			total = calculateTotal(counter);
-			System.out.println("Total Tuition: " + total);
-			displayMainMenu();
 		}
-	 dropCourse(counter); 
+	switch (input) {
+		
+	case "HIST1001":
+	case "MATH1001":
+	case "CHEM1001":
+	case "ENGL1001":
+	case "COMP1001":
+		counter_Dropped++;
+		break;
+	}
+	
+	dropCourse(counter_Dropped);
+}
  }
  //Display the main menu to the user
 //Display "main menu"
@@ -236,16 +252,27 @@ public String getStudentNumber(){
 	if (answer == 1) 
 		enrollStudent();
 	if (answer == 2)
-		dropCourse(counter);	
+		dropCourse(counter_Dropped);	
  	
  	}
 //Calculate the total bill for the student
 //Calculate total tuition bill after enrollment
- public int calculateTotal(int counter) {
-		 int total;
+ public int calculateTotalEnrollment(int counter_Enrollment) {
+		 int total_E;
 		 //counter = this.counter;
-		 total = counter * 600;
-		 return total;
+		 
+			 total_E = counter_Enrollment * 600;
+		 return total_E;
  	}
+ 
+ //Calculate the total bill after dropped courses
+ public int calculateTotalDropped(int counter_Dropped, int total_E){
+	 int total_D;
+	 int credit;
+	 total_D = counter_Dropped * 600;
+	 credit = total_D - total_E;
+	 
+	 return credit;
+ }
 }
 
