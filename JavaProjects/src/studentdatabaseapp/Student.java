@@ -1,6 +1,5 @@
 package studentdatabaseapp;
 
-
 import java.util.Scanner;
 
 public class Student {
@@ -11,13 +10,16 @@ private String studentNumber;
 private int answer;
 private int counter_Enrollment;
 private int counter_Dropped;
+private int total_Enrolled;
+private int total_Dropped;
 private int total_E;
 private int total_Final_E;
 private int total_Refund;
 private String course[] = new String[5];
+private String dropped[] = new String[5];
 Scanner in = new Scanner (System.in);
 
-//////////////////Constructor////////////////////////////////
+////////////////////Start Constructor//////////////////////////////////////////////
 public Student (){
 	String userName = this.userName;
 	int studentYear = this.studentYear;
@@ -41,7 +43,7 @@ public Student (){
 	displayMainMenu();
 	
 }
-/////////////////End Constructor//////////////////////////////////////////////// 
+////////////////////End Constructor//////////////////////////////////////////////// 
 //Get the number of students being entered
 public int getNumberOfStudents()  {
 	System.out.println("Enter number of Students: ");
@@ -49,7 +51,6 @@ public int getNumberOfStudents()  {
 	return numStudents; 
 	
 }
-//Get student name
 //Get the name of the student(s)
 public String getUserName(){
 	in = new Scanner (System.in);
@@ -60,7 +61,6 @@ public String getUserName(){
     return userName;    
 }
 //Get Student ID Number
-//Get the students' ID number
 public String getStudentNumber(){
   String idSet = "123456789"; char
   studentNumber[] = new char [5];
@@ -70,17 +70,15 @@ public String getStudentNumber(){
   } 
   return new String (studentNumber); 
 }
-//Get grade of student
 //Get the year of the student
- public int getStudentYear() {
+public int getStudentYear() {
   System.out.println("Enter the year of the student: "); in = new
   Scanner(System.in); 
    studentYear = in.nextInt();
   return studentYear;
  }
 //Display student info to user
- //Display student info 
- public void displayStudentInfo(String userName, int studentYear, String studentNumber) {
+public void displayStudentInfo(String userName, int studentYear, String studentNumber) {
 	String userName_2 = this.userName;
 	int stuYear = this.studentYear;
 	String stuNum = this.studentNumber;
@@ -92,8 +90,8 @@ public String getStudentNumber(){
 	 
 	 return;
  	}
- //Enroll Student in course 
- public void enrollStudent() {
+//Enroll Student in course 
+public void enrollStudent() {
 	 
 	 System.out.println("History 101 [HIST1001]" 
 			 		+ "\nMathematics 1001 [MATH1001]" 
@@ -138,7 +136,7 @@ public String getStudentNumber(){
 				case "Q":
 					course.clone().toString();
 					System.out.println("Program Ended");
-					System.out.println("Enrolled Courses: \n");
+					System.out.println("Enrolled Courses:");
 					
 					for (int i=0; i < course.length; i++) {
 						
@@ -166,9 +164,9 @@ public String getStudentNumber(){
 		enrollStudent();
 	 }
  }
-//Drop a student from a course
- //Drop student from course
- public void dropCourse(int counter_Dropped) {
+//Drop student from course
+public void dropCourse() {
+	 
 	 
 	 System.out.println("History 101 [HIST1001]" 
 		 		+ "\nMathematics 1001 [MATH1001]" 
@@ -181,53 +179,54 @@ System.out.println("Enter course to drop [Q to quit]: ");
 in = new Scanner (System.in);
 String input = in.next();
 	 
-if(in.findAll("HIST1001"+ "MATH1001" + "CHEM1001" + "ENGL1001" + "COMP1001") != null) {
+if(in.findAll("HIST1001"+ "MATH1001" + "CHEM1001" + "ENGL1001" + "COMP1001" + "Q") != null) {
 	switch (input)
 	{
 	
 			case "HIST1001":
-			course[0] = "History 101 dropped";
-			System.out.println("History 101 dropped\n");
-			 break;
+				dropped[0] = "HIST1001";
+				System.out.println("History 101 dropped\n");
+				break;
 			 
 			case "MATH1001":
-			course[1] = "Math dropped";
-			 System.out.println("Mathematics 101 dropped\n");
-			 break;
+				dropped[1] = "MATH1001";
+				 System.out.println("Mathematics 101 dropped\n");
+				 break;
 			 
 			case "CHEM1001":
-				course[2] = "CHEM1001";
+				dropped[2] = "CHEM1001";
 				System.out.println("Chemistry 101 dropped\n");
 				break;
 				
 			case "ENGL1001":
-				course[3] = "ENGL1001";
+				dropped[3] = "ENGL1001";
 				System.out.println("English 101 dropped\n");
 				break;
 				
 			case "COMP1001":
-				course[4] = "COMP1001";
+				dropped[4] = "COMP1001";
 				System.out.println("Computer Science 101 dropped\n");
 				break;	
 				
 			case "Q":
 				course.clone().toString();
 				System.out.println("Program Ended");
-				System.out.println("Dropped Courses: \n");
+				System.out.println("Dropped Courses:");
 				
-				for (int i=0; i < course.length; i++) {
+				for (int i=0; i < dropped.length; i++) {
 					
-				   if (course[i] != null) {
-					   System.out.println(course[i]);
+				   if (dropped[i] != null) {
+					   System.out.println(dropped[i]);
 					}
 				}
 				
 				total_Refund = calculateTotalDropped(counter_Dropped, total_E);
-				System.out.println("Credit: " + total_Refund);
+				System.out.println("\nCredit: " + total_Refund);
 				displayMainMenu();
 			
 		}
-	switch (input) {
+	switch (input) 
+	{
 		
 	case "HIST1001":
 	case "MATH1001":
@@ -237,13 +236,11 @@ if(in.findAll("HIST1001"+ "MATH1001" + "CHEM1001" + "ENGL1001" + "COMP1001") != 
 		counter_Dropped++;
 		break;
 	}
-	
-	dropCourse(counter_Dropped);
+	dropCourse();
+	}
 }
- }
- //Display the main menu to the user
-//Display "main menu"
- public void displayMainMenu() {
+//Display the main menu to the user
+public void displayMainMenu() {
 	System.out.println("\nWhat would you like to do?");
 	System.out.println("Enrollment [1]" + "\nDrop Course [2]" + "\nSee Student Bill [3]");
 	in = new Scanner(System.in);
@@ -252,27 +249,32 @@ if(in.findAll("HIST1001"+ "MATH1001" + "CHEM1001" + "ENGL1001" + "COMP1001") != 
 	if (answer == 1) 
 		enrollStudent();
 	if (answer == 2)
-		dropCourse(counter_Dropped);	
+		dropCourse();
+	if (answer == 3)
+		tuitionFees(total_Enrolled, total_Dropped);
  	
  	}
-//Calculate the total bill for the student
 //Calculate total tuition bill after enrollment
- public int calculateTotalEnrollment(int counter_Enrollment) {
+public int calculateTotalEnrollment(int counter_Enrollment) {
 		 int total_E;
-		 //counter = this.counter;
 		 
 			 total_E = counter_Enrollment * 600;
 		 return total_E;
  	}
- 
- //Calculate the total bill after dropped courses
- public int calculateTotalDropped(int counter_Dropped, int total_E){
+//Calculate the total bill after dropped courses
+public int calculateTotalDropped(int counter_Dropped, int total_E){
 	 int total_D;
 	 int credit;
 	 total_D = counter_Dropped * 600;
 	 credit = total_D - total_E;
 	 
 	 return credit;
+ }
+//Calculate total tuition fees
+public void tuitionFees(int total_E, int credit) {
+	 int tuitionFees;
+	 tuitionFees = total_E - credit;
+	 System.out.println("Total amount due: " + tuitionFees);
  }
 }
 
