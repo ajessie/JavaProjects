@@ -12,7 +12,6 @@ private int counter_Enrollment;
 private int counter_Dropped;
 private int total_E;
 private int total_Final_E;
-private int tuitionFees;
 private int credit;
 private int totalTuitionCount;
 private String course[] = new String[5];
@@ -269,11 +268,5 @@ public int calculateTotalDropped(int counter_Dropped, int total_E){
 	 credit = total_D;
 	 
 	 return credit;
- }
-//Calculate total tuition fees
-public int tuitionFees(int totalTuitionCount) {
-	int tuitionFees = totalTuitionCount;
-	return tuitionFees;
-	//System.out.println("Total Tuition Cost: " + tuitionFees);
  }
 }
