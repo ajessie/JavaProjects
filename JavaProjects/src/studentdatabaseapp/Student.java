@@ -10,11 +10,11 @@ private String studentNumber;
 private int answer;
 private int counter_Enrollment;
 private int counter_Dropped;
-private int total_Enrolled;
-private int total_Dropped;
 private int total_E;
 private int total_Final_E;
-private int total_Refund;
+private int tuitionFees;
+private int credit;
+private int totalTuitionCount;
 private String course[] = new String[5];
 private String dropped[] = new String[5];
 Scanner in = new Scanner (System.in);
@@ -145,7 +145,8 @@ public void enrollStudent() {
 						}
 					}
 					
-					total_Final_E = calculateTotalEnrollment(counter_Enrollment)			;		
+					total_Final_E = calculateTotalEnrollment(counter_Enrollment);
+					totalTuitionCount = total_E - credit;		
 					System.out.println("Enrollment fees: " + total_Final_E);
 					displayMainMenu();
 				
@@ -220,8 +221,10 @@ if(in.findAll("HIST1001"+ "MATH1001" + "CHEM1001" + "ENGL1001" + "COMP1001" + "Q
 					}
 				}
 				
-				total_Refund = calculateTotalDropped(counter_Dropped, total_E);
-				System.out.println("\nCredit: " + total_Refund);
+				
+				calculateTotalDropped(counter_Dropped, total_E);
+				totalTuitionCount = total_E - credit;
+				System.out.println("\nCredit: " + credit);
 				displayMainMenu();
 			
 		}
@@ -250,31 +253,27 @@ public void displayMainMenu() {
 		enrollStudent();
 	if (answer == 2)
 		dropCourse();
-	if (answer == 3)
-		tuitionFees(total_Enrolled, total_Dropped);
- 	
- 	}
+	if (answer == 3) 
+		System.out.println("\nTuition Fees Due: " + totalTuitionCount + "\n");
+}
 //Calculate total tuition bill after enrollment
 public int calculateTotalEnrollment(int counter_Enrollment) {
-		 int total_E;
 		 
-			 total_E = counter_Enrollment * 600;
+		total_E = counter_Enrollment * 600;
 		 return total_E;
  	}
 //Calculate the total bill after dropped courses
 public int calculateTotalDropped(int counter_Dropped, int total_E){
 	 int total_D;
-	 int credit;
 	 total_D = counter_Dropped * 600;
-	 credit = total_D - total_E;
+	 credit = total_D;
 	 
 	 return credit;
  }
 //Calculate total tuition fees
-public void tuitionFees(int total_E, int credit) {
-	 int tuitionFees;
-	 tuitionFees = total_E - credit;
-	 System.out.println("Total amount due: " + tuitionFees);
+public int tuitionFees(int totalTuitionCount) {
+	int tuitionFees = totalTuitionCount;
+	return tuitionFees;
+	//System.out.println("Total Tuition Cost: " + tuitionFees);
  }
 }
-
