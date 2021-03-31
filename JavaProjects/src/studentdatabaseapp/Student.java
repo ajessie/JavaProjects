@@ -13,10 +13,10 @@ private int total_E;
 private int total_Final_E;
 private int credit;
 private int totalTuitionCount;
+private int totalAfterPayment;
 private String course[] = new String [5];
 private String dropped[] = new String[5];
 Scanner in = new Scanner (System.in);
-
 ////////////////////Start Constructor//////////////////////////////////////////////
 public Student (){
 	//Call a method to ask user the name of student
@@ -26,9 +26,30 @@ public Student (){
 	//call method to get student number
 	this.studentNumber = getStudentNumber();
 	//Call methods to display information to user
-	displayMainMenu();	
+	while (true) {
+		switch (answer){
+		case 1:
+			enrollStudent();
+			break;
+		case 2:
+			dropCourse();
+			break;
+		case 3:
+			makePayment(totalTuitionCount);
+			System.out.println("Your balance is now: " + totalAfterPayment);
+			break;
+		}
+	displayMainMenu();
+	}
 }
 ////////////////////End Constructor//////////////////////////////////////////////// 
+//Make selection menu
+//Prevent constructor from being crowded with sys out print statements
+public void displayOptions() {
+	System.out.println("Enrollment [1]" 
+					  +"Drop Course [2]"
+			          +"Tuition Bill[3]");
+}
 //Get the number of students being entered
 public int getNumberOfStudents()  {
 	System.out.println("Enter number of Students: ");
@@ -135,8 +156,7 @@ public void enrollStudent(){
 					enrollStudent();
 					break;
 			}
-	 	}
-	 displayMainMenu();
+	 }
 }
 //Drop student from course
 public void dropCourse() {
@@ -193,22 +213,17 @@ if(in.findAll("HIST1001"+ "MATH1001" + "CHEM1001" + "ENGL1001" + "COMP1001" + "Q
 				System.out.println("Credit: " + credit + "\n");
 				break;
 		}
-		
 	switch (input) {	
-			case "HIST1001":
-			case "MATH1001":
-			case "CHEM1001":
-			case "ENGL1001":
-			case "COMP1001":
-				counter_Dropped++;
-				dropCourse();
-				break;
-			case "Q":
-				displayMainMenu();
-				break;
+				case "HIST1001":
+				case "MATH1001":
+				case "CHEM1001":
+				case "ENGL1001":
+				case "COMP1001":
+					counter_Dropped++;
+					dropCourse();
+					break;
 		}
-	}
-	displayMainMenu();
+	}	
 }
 //Display the main menu to the user
 public void displayMainMenu() {	
@@ -217,13 +232,6 @@ public void displayMainMenu() {
 	System.out.println("Enrollment [1]" + " " + "Drop Course [2]" + " " + "See Student Bill [3]");
 	in = new Scanner(System.in);
 	answer = in.nextInt();
-	
-	if (answer == 1) 
-		enrollStudent();
-	if (answer == 2)
-		dropCourse();
-	if (answer == 3) 
-		displayStudentInfo(userName,studentYear, studentNumber);
 }
 //Calculate total tuition bill after enrollment
 public int calculateTotalEnrollment(int counter_Enrollment) {
@@ -238,4 +246,16 @@ public int calculateTotalDropped(int counter_Dropped, int total_E){
 	
 	 	return credit;
  }
+//Allow user to make a payment to the account
+public int makePayment(int totalTuitionCount) {
+	System.out.println("Amount Due: "+ totalTuitionCount);
+	System.out.println("Please enter payment amount in multiples of 10");
+	in = new Scanner (System.in);
+	int paymentAmount = in.nextInt();
+	
+	if (paymentAmount % 10 == 0)
+		totalAfterPayment = totalTuitionCount - paymentAmount;
+	
+	return totalAfterPayment;
+	}
 }
