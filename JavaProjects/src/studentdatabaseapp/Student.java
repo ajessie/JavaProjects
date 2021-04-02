@@ -16,17 +16,14 @@ private int totalTuitionCount;
 private int totalAfterPayment;
 private String course[] = new String [5];
 private String dropped[] = new String[5];
+private boolean breakLoop = true;
 Scanner in = new Scanner (System.in);
+
 ////////////////////Start Constructor//////////////////////////////////////////////
 public Student (){
-	//Call a method to ask user the name of student
-	this.userName = getUserName();	
-	//Call method to get the grade of the student 
-	this.studentYear = getStudentYear();
-	//call method to get student number
-	this.studentNumber = getStudentNumber();
-	//Call methods to display information to user
-	while (true) {
+//Call method to get the information of the student
+	getInfo();
+	while (breakLoop) {
 		switch (answer){
 		case 1:
 			enrollStudent();
@@ -38,18 +35,17 @@ public Student (){
 			makePayment(totalTuitionCount);
 			System.out.println("Your balance is now: " + totalAfterPayment);
 			break;
+		case 4:
+			breakLoop = false;
+			System.out.println("//////////////////////New Student Entry/////////////////////////");
+			getInfo();
+			break;
 		}
 	displayMainMenu();
 	}
+	displayMainMenu();
 }
 ////////////////////End Constructor//////////////////////////////////////////////// 
-//Make selection menu
-//Prevent constructor from being crowded with sys out print statements
-public void displayOptions() {
-	System.out.println("Enrollment [1]" 
-					  +"Drop Course [2]"
-			          +"Tuition Bill[3]");
-}
 //Get the number of students being entered
 public int getNumberOfStudents()  {
 	System.out.println("Enter number of Students: ");
@@ -229,7 +225,10 @@ if(in.findAll("HIST1001"+ "MATH1001" + "CHEM1001" + "ENGL1001" + "COMP1001" + "Q
 public void displayMainMenu() {	
 	System.out.println("Student Name: " + userName + "  " + "Student Number: " + studentNumber + "  " +  "Student Year: " + studentYear);
 	System.out.println("\n/////////What would you like to do?///////////////");
-	System.out.println("Enrollment [1]" + " " + "Drop Course [2]" + " " + "See Student Bill [3]");
+	System.out.println("Enrollment      [1]\n" 
+	                 + "Drop Course     [2]\n" 
+			         + "See Student Bill[3]\n"
+					 + "Add New Student [4]");
 	in = new Scanner(System.in);
 	answer = in.nextInt();
 }
@@ -257,5 +256,14 @@ public int makePayment(int totalTuitionCount) {
 		totalAfterPayment = totalTuitionCount - paymentAmount;
 	
 	return totalAfterPayment;
+	}
+//Allows users to add a new student to the database
+public void getInfo() {
+	//Call a method to ask user the name of student
+	this.userName = getUserName();	
+	//Call method to get the grade of the student 
+	this.studentYear = getStudentYear();
+	//call method to get student number
+	this.studentNumber = getStudentNumber();
 	}
 }
